@@ -9,6 +9,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"strings"
 
@@ -31,11 +32,13 @@ func saveToDisk(i media.Writer, track *webrtc.TrackRemote) {
 	for {
 		rtpPacket, _, err := track.ReadRTP()
 		if err != nil {
-			fmt.Println(err)
+			log.Println(err)
+
 			return
 		}
 		if err := i.WriteRTP(rtpPacket); err != nil {
-			fmt.Println(err)
+			log.Println(err)
+
 			return
 		}
 		fmt.Println("rtpPacket", rtpPacket)
